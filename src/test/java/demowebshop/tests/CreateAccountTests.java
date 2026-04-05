@@ -12,72 +12,58 @@ import java.time.Duration;
 public class CreateAccountTests extends TestBase{
 
     @Test (enabled = false)
-    public void newUserRegisterPositiveTest(){
+    public void newUserRegisterPositiveTest(String text){
 
         int i = (int) ((System.currentTimeMillis()/1000)%3600); //чтобы тест много раз генерировался
 
         //click on Register button (Link) in the header
-        driver.findElement(By.cssSelector("[href='/register']")).click();
-        //enter First name
-        driver.findElement(By.name("FirstName")).click();
-        driver.findElement(By.name("FirstName")).clear();
-        driver.findElement(By.name("FirstName")).sendKeys("Wenzel");
-        //enter Last name
-        driver.findElement(By.name("LastName")).click();
-        driver.findElement(By.name("LastName")).clear();
-        driver.findElement(By.name("LastName")).sendKeys("Becker");
-        //enter Email
-        driver.findElement(By.name("Email")).click();
-        driver.findElement(By.name("Email")).clear();
-        driver.findElement(By.name("Email")).sendKeys("wbekker869" + "@gmail.com"); //чтобы тест много раз генерировался
-        //enter Password
-        driver.findElement(By.name("Password")).click();
-        driver.findElement(By.name("Password")).clear();
-        driver.findElement(By.name("Password")).sendKeys("Aa123456!");
-        //confirm Password
-        driver.findElement(By.name("ConfirmPassword")).click();
-        driver.findElement(By.name("ConfirmPassword")).clear();
-        driver.findElement(By.name("ConfirmPassword")).sendKeys("Aa123456!");
-
-        //click Register button
-        driver.findElement(By.name("register-button")).click();
+        existedUserRegisterNegativeTest(text);
 
         //assert Log Out button (link)
         Assert.assertTrue(isElementPresent(By.xpath("//*[@class='header']//li[2]")));
     }
 
+    public void type(By locator) {
+        click(locator);
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys("Wenzel");
+    }
+
+    public void click(By locator) {
+        driver.findElement(locator).click();
+    }
+
     //negative test
     @Test
-    public void existedUserRegisterNegativeTest(){
+    public void existedUserRegisterNegativeTest(String text){
 
         //click on Register button (Link) in the header
-        driver.findElement(By.cssSelector("[href='/register']")).click();
+        click(By.cssSelector("[href='/register']"));
         //enter First name
-        driver.findElement(By.name("FirstName")).click();
-        driver.findElement(By.name("FirstName")).clear();
-        driver.findElement(By.name("FirstName")).sendKeys("Wenzel");
+        type(By.name("FirstName"));
         //enter Last name
-        driver.findElement(By.name("LastName")).click();
+        click(By.name("LastName"));
         driver.findElement(By.name("LastName")).clear();
         driver.findElement(By.name("LastName")).sendKeys("Becker");
         //enter Email
-        driver.findElement(By.name("Email")).click();
+        click(By.name("Email"));
         driver.findElement(By.name("Email")).clear();
-        driver.findElement(By.name("Email")).sendKeys("wbekker869@gmail.com");
+        driver.findElement(By.name("Email")).sendKeys(text);
         //enter Password
-        driver.findElement(By.name("Password")).click();
+        click(By.name("Password"));
         driver.findElement(By.name("Password")).clear();
         driver.findElement(By.name("Password")).sendKeys("Aa123456!");
         //confirm Password
-        driver.findElement(By.name("ConfirmPassword")).click();
+        click(By.name("ConfirmPassword"));
         driver.findElement(By.name("ConfirmPassword")).clear();
         driver.findElement(By.name("ConfirmPassword")).sendKeys("Aa123456!");
 
         //click Register button
-        driver.findElement(By.name("register-button")).click();
+        click(By.name("register-button"));
 
     }
 
+    // created method for Alert
     public boolean isAlertPresent (){
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.alertIsPresent());
             if (alert == null){
