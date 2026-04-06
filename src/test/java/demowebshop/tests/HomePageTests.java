@@ -1,34 +1,15 @@
 package demowebshop.tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
-public class HomePageTests {
-
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup(); //для постоянного обновления
-        driver = new ChromeDriver();
-        driver.get("https://demowebshop.tricentis.com/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
+public class HomePageTests extends TestBase {
 
     @Test
-    public void addContactPositiveTest(){
+    //2е действие, создаем первый тест
+   public void isHomeComponentPresentTest(){
+       //System.out.println("Home component" + isHomeComponentPresent()); - это чтобы увидеть в консоли результат проверки
+       Assert.assertTrue(isHomeComponentPresent()); // так мы сравниваем результат, так должен заканчиваться тест
+   }
 
-    }
-
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
 }

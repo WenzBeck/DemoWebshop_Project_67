@@ -17,50 +17,40 @@ public class CreateAccountTests extends TestBase{
         int i = (int) ((System.currentTimeMillis()/1000)%3600); //чтобы тест много раз генерировался
 
         //click on Register button (Link) in the header
-        existedUserRegisterNegativeTest(text);
+        existedUserRegisterNegativeTest();
 
         //assert Log Out button (link)
         Assert.assertTrue(isElementPresent(By.xpath("//*[@class='header']//li[2]")));
     }
 
-    public void type(By locator) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys("Wenzel");
-    }
 
-    public void click(By locator) {
-        driver.findElement(locator).click();
-    }
 
     //negative test
     @Test
-    public void existedUserRegisterNegativeTest(String text){
+    public void existedUserRegisterNegativeTest(){
 
-        //click on Register button (Link) in the header
+        String text = "test" + System.currentTimeMillis() + "@test.com";
+
+        //click Register link
         click(By.cssSelector("[href='/register']"));
+
         //enter First name
-        type(By.name("FirstName"));
+        type(By.name("FirstName"), "Wenzel");
+
         //enter Last name
-        click(By.name("LastName"));
-        driver.findElement(By.name("LastName")).clear();
-        driver.findElement(By.name("LastName")).sendKeys("Becker");
+        type(By.name("LastName"), "Becker");
+
         //enter Email
-        click(By.name("Email"));
-        driver.findElement(By.name("Email")).clear();
-        driver.findElement(By.name("Email")).sendKeys(text);
+        type(By.name("Email"), text);
+
         //enter Password
-        click(By.name("Password"));
-        driver.findElement(By.name("Password")).clear();
-        driver.findElement(By.name("Password")).sendKeys("Aa123456!");
+        type(By.name("Password"), "Aa123456!");
+
         //confirm Password
-        click(By.name("ConfirmPassword"));
-        driver.findElement(By.name("ConfirmPassword")).clear();
-        driver.findElement(By.name("ConfirmPassword")).sendKeys("Aa123456!");
+        type(By.name("ConfirmPassword"), "Aa123456!");
 
         //click Register button
         click(By.name("register-button"));
-
     }
 
     // created method for Alert
