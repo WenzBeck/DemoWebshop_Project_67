@@ -15,40 +15,31 @@ public class ItemTests extends TestBase{
 
 
     @BeforeMethod
-    public void precondition(){
-        login("fbekker8@gmail.com", "Aa123456!");
+    public void precondition() {
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillLoginRegisterForm(
+                new User()
+                        .setEmail(UserData.email)
+                        .setPassword(UserData.password)
+        );
+        app.getUser().clickOnLoginButton();
     }
 
     @Test
-    public void addItemToCartTest(){
+    public void addItemToCartTest() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String itemName = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("(//div[@class='product-item']//h2/a)[2]")
-        )).getText();
-       // String itemName = driver.findElement(By.xpath("(//h2[@class='product-title']/a)[2]")).getText();
-        List<WebElement> addButtons = driver.findElements(By.cssSelector("input[value='Add to cart']"));
-        click(By.cssSelector("[href='/cart']"));
+        // берём имя второго товара
+        String itemName = app.getHome().getSecondItemName();
 
+        // добавляем второй товар
+        app.getHome().addSecondItemToCart();
+
+        // открываем корзину
+        app.getHome().openCart();
+
+        // проверяем
         Assert.assertTrue(
-                isElementPresent(By.xpath("//a[@class='product-name' and text()='" + itemName + "']"))
-        );
-
-        // кликнуть на кнопку второго товара Add to cart
-        WebElement secondAddButton = addButtons.get(1);
-
-        //WebElement productItem = secondAddButton.findElement(By.xpath("./ancestor::div[@class='product-item']"));
-
-
-        //click to Add to cart
-        secondAddButton.click();
-
-        //click Shopping cart
-        click(By.cssSelector("[href='/cart']"));
-
-        //проверить товар по имени
-        Assert.assertTrue(
-                isElementPresent(By.xpath("//a[@class='product-name' and text()='14.1-inch Laptop']"))
+                app.getHome().isItemInCart(itemName)
         );
     }
 }

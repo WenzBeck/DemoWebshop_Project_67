@@ -11,55 +11,37 @@ import java.time.Duration;
 
 public class CreateAccountTests extends TestBase{
 
-    @Test (enabled = false)
-    public void newUserRegisterPositiveTest(String text){
-
-        int i = (int) ((System.currentTimeMillis()/1000)%3600); //чтобы тест много раз генерировался
-
-        //click on Register button (Link) in the header
-        existedUserRegisterNegativeTest();
-
-        //assert Log Out button (link)
-        Assert.assertTrue(isElementPresent(By.xpath("//*[@class='header']//li[2]")));
-    }
-
-
-
-    //negative test
     @Test
-    public void existedUserRegisterNegativeTest(){
+    public void newUserRegisterPositiveTest() {
 
-        String text = "test" + System.currentTimeMillis() + "@test.com";
+        String email = "test" + System.currentTimeMillis() + "@test.com";
 
-        //click Register link
-        click(By.cssSelector("[href='/register']"));
+        app.getUser().clickOnRegisterLink();
 
-        //enter First name
-        type(By.name("FirstName"), "Wenzel");
+        app.getUser().fillRegisterForm(
+                new User()
+                        .setEmail(email)
+                        .setPassword("Aa123456!")
+        );
 
-        //enter Last name
-        type(By.name("LastName"), "Becker");
+        app.getUser().submitRegistration();
 
-        //enter Email
-        type(By.name("Email"), text);
-
-        //enter Password
-        type(By.name("Password"), "Aa123456!");
-
-        //confirm Password
-        type(By.name("ConfirmPassword"), "Aa123456!");
-
-        //click Register button
-        click(By.name("register-button"));
+        Assert.assertTrue(app.getUser().isSignButtonPresent());
     }
 
-    // created method for Alert
-    public boolean isAlertPresent (){
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.alertIsPresent());
-            if (alert == null){
-                return false;
-            } else {
-                return true;
-            }
-        }
+    @Test
+    public void existedUserRegisterNegativeTest() {
+
+        app.getUser().clickOnRegisterLink();
+
+        app.getUser().fillRegisterForm(
+                new User()
+                        .setEmail(UserData.email)
+                        .setPassword("Aa123456!")
+        );
+
+        app.getUser().submitRegistration();
+
+        Assert.assertTrue(app.getUser().isErrorMessagePresent());
+    }
 }
