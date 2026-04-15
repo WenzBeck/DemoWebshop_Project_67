@@ -1,9 +1,12 @@
 package demowebshop.tests;
 
+import demowebshop.core.TestBase;
+import demowebshop.data.UserData;
+import demowebshop.models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTests extends TestBase{
+public class LoginTests extends TestBase {
 
     @Test
     public void loginPositiveTest() {

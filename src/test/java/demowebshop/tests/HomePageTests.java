@@ -1,5 +1,6 @@
 package demowebshop.tests;
 
+import demowebshop.core.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

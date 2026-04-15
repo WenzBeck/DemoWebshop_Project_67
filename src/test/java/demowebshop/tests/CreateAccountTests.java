@@ -1,15 +1,12 @@
 package demowebshop.tests;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import demowebshop.core.TestBase;
+import demowebshop.data.UserData;
+import demowebshop.models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
-public class CreateAccountTests extends TestBase{
+public class CreateAccountTests extends TestBase {
 
     @Test
     public void newUserRegisterPositiveTest() {

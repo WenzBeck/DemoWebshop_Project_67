@@ -1,5 +1,6 @@
-package demowebshop.tests;
+package demowebshop.fw;
 
+import demowebshop.core.BaseHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePageHelper extends BaseHelper{
+public class HomePageHelper extends BaseHelper {
 
     public HomePageHelper(WebDriver driver) {
         super(driver);

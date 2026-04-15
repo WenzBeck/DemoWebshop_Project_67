@@ -1,4 +1,4 @@
-package demowebshop.tests;
+package demowebshop.models;
 
 public class User {
 

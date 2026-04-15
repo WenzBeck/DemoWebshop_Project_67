@@ -1,5 +1,7 @@
-package demowebshop.tests;
+package demowebshop.fw;
 
+import demowebshop.core.BaseHelper;
+import demowebshop.models.User;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class UserHelper extends BaseHelper{
+public class UserHelper extends BaseHelper {
 
     public UserHelper(WebDriver driver) {
         super(driver);

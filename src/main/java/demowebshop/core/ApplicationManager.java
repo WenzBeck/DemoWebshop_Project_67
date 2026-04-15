@@ -1,5 +1,7 @@
-package demowebshop.tests;
+package demowebshop.core;
 
+import demowebshop.fw.HomePageHelper;
+import demowebshop.fw.UserHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 

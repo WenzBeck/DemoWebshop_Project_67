@@ -1,4 +1,4 @@
-package demowebshop.tests;
+package demowebshop.data;
 
 public class UserData {
     public static final String email = "fbekker8@gmail.com";
