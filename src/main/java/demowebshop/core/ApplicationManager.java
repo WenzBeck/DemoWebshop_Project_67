@@ -4,6 +4,8 @@ import demowebshop.fw.HomePageHelper;
 import demowebshop.fw.UserHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApplicationManager {
 
@@ -13,10 +15,18 @@ public class ApplicationManager {
     HomePageHelper home;
 
     public void init() {
-        driver = new ChromeDriver();
+        String browser = System.getProperty("browser", "chrome");
+
+        if (browser.equalsIgnoreCase("chrome")) {
+            driver = new ChromeDriver();
+        } else if (browser.equalsIgnoreCase("edge")) {
+            driver = new EdgeDriver();
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            driver = new FirefoxDriver();
+        }
+
         driver.get("https://demowebshop.tricentis.com/");
         driver.manage().window().maximize();
-
         user = new UserHelper(driver);
         home = new HomePageHelper(driver);
     }

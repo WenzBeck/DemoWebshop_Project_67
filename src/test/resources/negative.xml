@@ -1,0 +1,16 @@
+<suite name="Negative">
+    <test name="NegativeTests">
+        <classes>
+            <class name="demowebshop.tests.LoginTests">
+                <methods>
+                    <include name=".*Negative.*"/>
+                </methods>
+            </class>
+            <class name="demowebshop.tests.CreateAccountTests">
+                <methods>
+                    <include name=".*Negative.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
