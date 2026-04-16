@@ -8,11 +8,13 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp() {
+
         app.init();
     }
 
     @AfterMethod
     public void tearDown() {
+
         app.stop();
     }
 }
