@@ -27,11 +27,16 @@ public class HomePageHelper extends BaseHelper {
         driver.findElements(By.cssSelector("input[value='Add to cart']"))
                 .get(1)
                 .click();
+        waitForNotificationToDisappear();
     }
 
     //подождали, чтобы кнопочка открылась
     public void openCart() {
-        waitForNotificationToDisappear();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("[href='/cart']")
+        ));
         click(By.cssSelector("[href='/cart']"));
     }
 
@@ -41,9 +46,4 @@ public class HomePageHelper extends BaseHelper {
         );
     }
 
-    // чтобы кнопка не перекрывалась
-    public void waitForNotificationToDisappear() {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.invisibilityOfElementLocated(By.id("bar-notification")));
-    }
 }
