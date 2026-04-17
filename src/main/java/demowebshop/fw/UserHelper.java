@@ -32,6 +32,13 @@ public class UserHelper extends BaseHelper {
         return isElementPresent(By.cssSelector("[href='/logout']"));
     }
 
+    public void waitForLoginSuccess() {
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector("YOUR_LOGOUT_OR_ACCOUNT_LOCATOR")
+                ));
+    }
+
     public boolean isAlertPresent() {
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.alertIsPresent());

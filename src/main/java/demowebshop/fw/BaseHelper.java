@@ -28,7 +28,7 @@ public class BaseHelper {
     }
 
     public void click(By locator) {
-
+        waitForNotificationToDisappear();
         driver.findElement(locator).click();
     }
 
