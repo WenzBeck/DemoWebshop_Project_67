@@ -2,6 +2,7 @@ package demowebshop.tests;
 
 import demowebshop.core.TestBase;
 import demowebshop.data.UserData;
+import demowebshop.details.UserDetails;
 import demowebshop.models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,8 +15,8 @@ public class LoginTests extends TestBase {
 
         app.getUser().fillLoginRegisterForm(
                 new User()
-                        .setEmail(UserData.email)
-                        .setPassword(UserData.password)
+                        .setEmail(UserDetails.EMAIL)
+                        .setPassword(UserDetails.PASSWORD)
         );
 
         app.getUser().clickOnLoginButton();
@@ -28,7 +29,7 @@ public class LoginTests extends TestBase {
         app.getUser().clickOnLoginLink();
 
         app.getUser().fillLoginRegisterForm(
-                new User().setPassword("Aa12345!")
+                new User().setPassword(UserDetails.PASSWORD)
         );
 
         app.getUser().clickOnLoginButton();
