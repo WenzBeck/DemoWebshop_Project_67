@@ -1,0 +1,3 @@
+test1@mail.com,password1,success
+wrong@mail.com,wrongpass,error
+,test123,error
