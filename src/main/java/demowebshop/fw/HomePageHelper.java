@@ -17,27 +17,26 @@ public class HomePageHelper extends BaseHelper {
         return isElementPresent(By.xpath("//div[@class='center-3']"));
     }
 
-    public String getSecondItemName() {
-        return driver.findElements(By.cssSelector(".product-item .product-title a"))
-                .get(1)
-                .getText();
-    }
+    //public String getSecondItemName() {
+        //return driver.findElements(By.cssSelector(".product-grid.home-page-product-grid .item-box:nth-child(3) input[type='button']"))
+                //.get(1)
+                //.getText();
+    //}
 
     public void addSecondItemToCart() {
-        driver.findElements(By.cssSelector("input[value='Add to cart']"))
-                .get(1)
-                .click();
+        click(By.cssSelector(".product-grid.home-page-product-grid .item-box:nth-child(3) input[type='button']"));
+
         waitForNotificationToDisappear();
     }
 
     //подождали, чтобы кнопочка открылась
     public void openCart() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("[href='/cart']")
-        ));
-        click(By.cssSelector("[href='/cart']"));
+        //wait.until(ExpectedConditions.elementToBeClickable(
+               // By.cssSelector("[href='/cart']")
+       // ));
+        click(By.cssSelector("#topcartlink [href='/cart']"));
     }
 
     public boolean isItemInCart(String itemName) {

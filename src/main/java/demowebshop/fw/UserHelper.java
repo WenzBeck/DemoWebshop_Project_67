@@ -32,11 +32,17 @@ public class UserHelper extends BaseHelper {
         return isElementPresent(By.cssSelector("[href='/logout']"));
     }
 
+    // исправил
     public void waitForLoginSuccess() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector("YOUR_LOGOUT_OR_ACCOUNT_LOCATOR")
-                ));
+                .until(driver -> isSignButtonPresent());
+    }
+
+    // добавил разлогирование
+    public void logout() {
+        if (isSignButtonPresent()) {
+            click(By.cssSelector("[href='/logout']"));
+        }
     }
 
     public boolean isAlertPresent() {
@@ -61,7 +67,6 @@ public class UserHelper extends BaseHelper {
         click(By.name("register-button"));
     }
 
-    //добавляем метод т.к. на сайте нет Алерт а есть только сообщение об ошибке
     public boolean isErrorMessagePresent() {
         return isElementPresent(By.cssSelector(".validation-summary-errors"));
     }

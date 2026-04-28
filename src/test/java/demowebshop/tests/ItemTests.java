@@ -10,9 +10,11 @@ import org.testng.annotations.Test;
 
 public class ItemTests extends TestBase {
 
-
     @BeforeMethod
     public void precondition() {
+
+        app.getUser().logout(); // ✅ добавили стабильность
+
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginRegisterForm(
                 new User()
@@ -26,18 +28,11 @@ public class ItemTests extends TestBase {
     @Test
     public void addItemToCartTest() {
 
-        // берём имя второго товара
-        String itemName = app.getHome().getSecondItemName();
-
-        // добавляем второй товар
         app.getHome().addSecondItemToCart();
-
-        // открываем корзину
         app.getHome().openCart();
 
-        // проверяем
         Assert.assertTrue(
-                app.getHome().isItemInCart(itemName)
+                app.getHome().isItemInCart("14.1-inch Laptop")
         );
     }
 }

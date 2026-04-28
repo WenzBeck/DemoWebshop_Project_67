@@ -12,6 +12,8 @@ public class LoginTests extends TestBase {
 
     @Test
     public void loginPositiveTest() {
+        app.getUser().logout(); // ✅ важно
+
         app.getUser().clickOnLoginLink();
 
         app.getUser().fillLoginRegisterForm(
@@ -21,12 +23,15 @@ public class LoginTests extends TestBase {
         );
 
         app.getUser().clickOnLoginButton();
+        app.getUser().waitForLoginSuccess();
 
         Assert.assertTrue(app.getUser().isSignButtonPresent());
     }
 
     @Test
     public void loginNegativeWithoutEmailTest() {
+        app.getUser().logout(); // ✅ важно
+
         app.getUser().clickOnLoginLink();
 
         app.getUser().fillLoginRegisterForm(
@@ -38,9 +43,10 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(app.getUser().isErrorMessagePresent());
     }
 
-    // параметризация
     @Test(dataProvider = "loginDataFromCsv", dataProviderClass = MyDataProviders.class)
     public void loginWithDataProviderTest(String email, String password, String expectedResult) {
+
+        app.getUser().logout(); // ✅ КЛЮЧЕВОЕ исправление
 
         app.getUser().clickOnLoginLink();
 
@@ -52,7 +58,8 @@ public class LoginTests extends TestBase {
 
         app.getUser().clickOnLoginButton();
 
-        if (expectedResult.equals("success")) {
+        if ("success".equalsIgnoreCase(expectedResult.trim())) {
+            app.getUser().waitForLoginSuccess(); // ✅ добавили
             Assert.assertTrue(app.getUser().isSignButtonPresent());
         } else {
             Assert.assertTrue(app.getUser().isErrorMessagePresent());

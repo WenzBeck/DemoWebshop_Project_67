@@ -38,6 +38,14 @@ public class ApplicationManager {
         home = new HomePageHelper(driver);
     }
 
+    public void pause(int millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void stop() {
         driver.quit();
     }
